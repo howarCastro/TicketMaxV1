@@ -5,7 +5,6 @@ import app.service.outputports.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class UserRepositoryImplCollection implements UserRepository {
 
     List<User> users = new ArrayList<>();
@@ -31,7 +30,14 @@ public class UserRepositoryImplCollection implements UserRepository {
 
     @Override
     public User selectById(int id) {
+        for (User usuario : users) {
+            if (usuario.getId() == id) {
+                return usuario;
+            }
+        }
         return null;
+
+
     }
 
     @Override
@@ -49,11 +55,33 @@ public class UserRepositoryImplCollection implements UserRepository {
 
     @Override
     public User updateUser(User user) {
+        User existente = selectById(user.getId());
+
+        if (existente != null) {
+            // Actualizamos TODOS los campos
+            existente.setName(user.getName());
+            existente.setLastName(user.getLastName());
+            existente.setEmail(user.getEmail());
+            existente.setPhone(user.getPhone());
+            existente.setPassword(user.getPassword());
+            existente.setCity(user.getCity());
+            existente.setPreferences(user.getPreferences());
+
+            return existente;
+        }
         return null;
     }
 
     @Override
     public void deleteById(int id) {
+        User usuario = selectById(id);
+        if (usuario != null) {
+            users.remove(usuario);
+        }
 
+    }
+    @Override
+    public int countTotalUsers() {
+        return users.size();
     }
 }

@@ -1,6 +1,7 @@
 package app.service.outputports;
 
 import app.domain.User;
+import app.service.outputports.UserRepository;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public interface UserRepository {
     public List<User> selectAll();
     public User updateUser(User user);
     public void deleteById(int id);
+    public int countTotalUsers();
 
 
 

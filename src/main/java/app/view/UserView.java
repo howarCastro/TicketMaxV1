@@ -55,6 +55,15 @@ public class UserView {
     public void update() {
 
     }
+    public void deleteUser(int id) {
+        userService.deleteUser(id);
+        System.out.println(" Si el usuario existía, fue eliminado");
+    }
+
+    public void mostrarTotal() {
+        int total = userService.countTotalUsers();
+        System.out.println(" Total de usuarios registrados: " + total);
+    }
 
 
     // métodos Helper

@@ -7,6 +7,8 @@ import app.service.outputports.UserRepository;
 import app.service.validators.DataTypeValidator;
 import app.view.SeatView;
 import app.view.UserView;
+import app.domain.User;
+import java.util.Scanner;
 
 public class CliUserInterface {
 
@@ -62,7 +64,8 @@ public class CliUserInterface {
 
         int option = DataTypeValidator.validateInt("Seleccione 1. registrar usuario " +
                 "2. Consultar Usuario por id" +
-                "3. Consultar todos los usuarios");
+                "3. Consultar todos los usuarios" + "4. Actualizar usuario " + "5. Eliminar usuario" +
+                "6. Total usuarios registrados");
 
         switch (option){
             case 1:
@@ -78,8 +81,18 @@ public class CliUserInterface {
                 System.out.println("Consultar todos los usuarios");
                 userView.selectUsers();
                 break;
+
+            case 5:
+                System.out.println("Eliminar usuario");
+                int idEliminar = DataTypeValidator.validateInt("Ingrese el id del usuario a eliminar: ");
+                userView.deleteUser(idEliminar);
+                break;
+            case 6:
+                System.out.println("Total de usuarios registrados");
+                userView.mostrarTotal();
+                break;
             default:
-                System.out.println("Ingrese una opción valida");
+                System.out.println("Ingrese una opción válida");
         }
 
 
